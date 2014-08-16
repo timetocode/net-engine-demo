@@ -1,0 +1,12 @@
+{
+  "name": "NetEngineDemo",
+  "version": "0.1.0",
+  "author": "Alex Bennett",
+  "description": "A demo of a HTML5 + node websocket server, with some automagic syncing of server -> client state.",
+  "dependencies": {
+      "websocket": "1.0.8"
+  },
+  "engines": {
+    "node": "0.10.12"
+  }
+}
