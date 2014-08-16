@@ -37,7 +37,7 @@ How to run the demo:
 
 The client-app.js is built with watchify from /client "watchify main.js -o client-app.js -v"
 
-The jist of the idea of the automagic server -> client syncing idea is to define a game entity like this:
+The jist of the idea of the automagic server -> client syncing is to define a game entity like this:
 
 ```javascript
 function Ninja() {
