@@ -35,8 +35,24 @@ How to run the demo:
 * run node server.js from /server
 * open browser and connect to localhost:8080
 
-The client-app.js is built with watchify from /client "watchify main.js -o client-app.js -v"
+The client-app.js is built with watchify from /client "watchify main.js -o client-app.js -v
 
+You'll see something like this:
+![alt tag](https://31.media.tumblr.com/d96c601b490c4aa916d190d7aee3e7da/tumblr_inline_nae5z8KjI41r61t4c.png)
+
+
+The demo itself:
+In the demo, the player is a red circle and a black box attached to the mouse cursor. Move the cursor around to move the player. You’ll see other circles (NPCs) moving and bouncing around. The black square represents the view of your character — think of it as being an analogy for your entire screen which only sees a small section of a much larger map. The NPCs are living out their lives, and exist regardless of whether they can be seen or not. As the player moves around new NPCs will enter the player’s field of vision, and other NPCs will drop out. The NPCs also have some strange behavior: in addition to moving, they undulate in size, and have a 1% chance of changing color every game tick. The goal of the netcode is to track all of the above changes, which are divided into 3 main categories:
+
+* a full update: player encounters an NPC and needs to know everything
+* a partial update: an NPC already in view continues to move (or undulate, or change color) and the player needs to know only about these changes
+* an subscribe: an NPC leaves the player’s view, and the player is told to forget about it
+
+The partial update can take one (or both) of two forms
+* a list of entity properties and their new values (called changedProps or miscProps in the code)
+* an optimized movement packet consisting of an id, deltaX and deltaY (called movementDelta)
+
+Main Concepts:
 The jist of the idea of the automagic server -> client syncing is to define a game entity like this:
 
 ```javascript
